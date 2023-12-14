@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import lotto.Lotto;
 
 public class LottoSeller {
     private static final int LOTTO_PRICE = 1_000;
@@ -21,6 +24,18 @@ public class LottoSeller {
         validateHasRemain(money);
 
         return money;
+    }
+
+    public List<Lotto> generateLottoTickets() {
+        int count = money / LOTTO_PRICE;
+        List<Lotto> tickets = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            List<Integer> oneTicket = generateLotto();
+            tickets.add(new Lotto(oneTicket));
+        }
+
+        return Collections.unmodifiableList(tickets);
     }
 
     public List<Integer> generateLotto() {

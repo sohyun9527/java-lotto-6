@@ -17,14 +17,6 @@ public class LottoSeller {
     }
 
     // 숫자로만 이루어져있는지, 1000원으로 나누어 떨어지는지
-    private int getValidMoney(String input) {
-        validateOnlyDigit(input);
-        int money = Integer.parseInt(input);
-        validateHasRemain(money);
-
-        return money;
-    }
-
     public List<Lotto> generateLottoTickets() {
         int count = money / LOTTO_PRICE;
         List<Lotto> tickets = new ArrayList<>();
@@ -35,6 +27,14 @@ public class LottoSeller {
         }
 
         return Collections.unmodifiableList(tickets);
+    }
+
+    private int getValidMoney(String input) {
+        validateOnlyDigit(input);
+        int money = Integer.parseInt(input);
+        validateHasRemain(money);
+
+        return money;
     }
 
     public List<Integer> generateLotto() {

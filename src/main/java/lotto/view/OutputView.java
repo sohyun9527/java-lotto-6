@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.text.NumberFormat;
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Locale;
@@ -33,6 +32,15 @@ public class OutputView {
         }
     }
 
+    public void printPrizeDetail(Prize prize, int count) {
+        String moneyFormat = moneyFormatter(prize.getPrizeMoney());
+        String message = String.format(RESULT_DETAIL, prize.getMatchCount(), moneyFormat, count);
+        if (prize == Prize.SECOND) {
+            message = String.format(BONUS_DETAIL, prize.getMatchCount(), moneyFormat, count);
+        }
+        System.out.println(message);
+    }
+
     public void printProfitRate(double profitRate) {
         System.out.printf((PROFIT_RESULT) + LINE_SEPARATOR, profitRate);
     }
@@ -54,9 +62,10 @@ public class OutputView {
         }
     }
 
+    // Collections.sort -> void, sorted() -> 정렬된 요소로 새 목록 생성
     public void printLottoNumbers(List<Integer> numbers) {
-        Collections.sort(numbers);
-        System.out.println(numbers);
+        List<Integer> sortedNumbers = numbers.stream().sorted().toList();
+        System.out.println(sortedNumbers);
     }
 
     public void printPurchaseCount(int count) {

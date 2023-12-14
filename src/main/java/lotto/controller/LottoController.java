@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map.Entry;
 import lotto.domain.Lotto;
 import lotto.domain.LottoSeller;
 import lotto.domain.Prize;
@@ -60,8 +61,13 @@ public class LottoController {
     }
 
     private void showPrizeResult(List<Lotto> tickets, WinningNumbers winningNumbers) {
+        outputView.printResultTitle();
         EnumMap<Prize, Integer> prizeResult = winningNumbers.checkPrizeResult(tickets);
-        outputView.printPrizeResult(prizeResult);
+        for (Entry<Prize, Integer> pair : prizeResult.entrySet()) {
+            if (pair.getKey() != Prize.NONE) {
+                outputView.printPrizeDetail(pair.getKey(), pair.getValue());
+            }
+        }
 
         ProfitCalculator calculator = new ProfitCalculator(prizeResult);
         outputView.printProfitRate(calculator.calculateProfit());

@@ -22,7 +22,7 @@ public class LottoSeller {
         List<Lotto> tickets = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            List<Integer> oneTicket = generateLotto();
+            List<Integer> oneTicket = getRandomNumbers();
             tickets.add(new Lotto(oneTicket));
         }
 
@@ -37,7 +37,14 @@ public class LottoSeller {
         return money;
     }
 
-    public List<Integer> generateLotto() {
+    public List<Integer> getSortedRandomNumbers() {
+        return getRandomNumbers()
+                .stream()
+                .sorted()
+                .toList();
+    }
+
+    private static List<Integer> getRandomNumbers() {
         return Randoms.pickUniqueNumbersInRange(START_NUMBER, END_NUMBER, NUMBER_COUNT);
     }
 

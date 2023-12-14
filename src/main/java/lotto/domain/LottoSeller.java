@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.Lotto;
 
 public class LottoSeller {
     private static final int LOTTO_PRICE = 1_000;

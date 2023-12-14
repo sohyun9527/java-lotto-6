@@ -43,7 +43,7 @@ public class OutputView {
     }
 
     public void printResultTitle() {
-        System.out.println(PRIZE_RESULT);
+        System.out.println(LINE_SEPARATOR + PRIZE_RESULT);
         System.out.println("---");
     }
 
@@ -52,7 +52,6 @@ public class OutputView {
         for (Lotto lotto : tickets) {
             printLottoNumbers(lotto.getNumbers());
         }
-        System.out.println(LINE_SEPARATOR);
     }
 
     public void printLottoNumbers(List<Integer> numbers) {

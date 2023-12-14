@@ -9,6 +9,7 @@ import lotto.domain.Prize;
 import lotto.domain.ProfitCalculator;
 import lotto.domain.WinningNumbers;
 import lotto.util.ReadUntilValid;
+import lotto.validation.Validation;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -44,6 +45,7 @@ public class LottoController {
             List<String> divide = List.of(input.split(",", -1));
             List<Integer> winningNumber = new ArrayList<>();
             for (String s : divide) {
+                Validation.validateContainSpace(s);
                 winningNumber.add(Integer.parseInt(s));
             }
             return new Lotto(winningNumber);

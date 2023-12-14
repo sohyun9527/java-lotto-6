@@ -15,13 +15,8 @@ public class OutputView {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String RESULT_DETAIL = "%d개 일치 (%s원) - %d개";
     private static final String BONUS_DETAIL = "%d개 일치, 보너스 볼 일치 (%s원) - %d개";
-    private static final String PROFIT_RESULT = "총 수익률은 %%입니다.";
+    private static final String PROFIT_RESULT = "총 수익률은 %.1f%%입니다.";
 
-
-    public void printSecondPrizeResult(int matchCount, long prizeMoney, int count) {
-        String message = String.format(BONUS_DETAIL, matchCount, moneyFormatter(prizeMoney), count);
-        System.out.println(message);
-    }
 
     public void printPrizeResult(EnumMap<Prize, Integer> prizeResult) {
         printResultTitle();
@@ -38,6 +33,10 @@ public class OutputView {
         }
     }
 
+    public void printProfitRate(double profitRate) {
+        System.out.printf((PROFIT_RESULT) + LINE_SEPARATOR, profitRate);
+    }
+
     private String moneyFormatter(long prizeMoney) {
         NumberFormat format = NumberFormat.getInstance(Locale.KOREA);
         return format.format(prizeMoney);
@@ -45,6 +44,7 @@ public class OutputView {
 
     public void printResultTitle() {
         System.out.println(PRIZE_RESULT);
+        System.out.println("---");
     }
 
     public void printPurchaseResult(List<Lotto> tickets, int count) {
@@ -52,6 +52,7 @@ public class OutputView {
         for (Lotto lotto : tickets) {
             printLottoNumbers(lotto.getNumbers());
         }
+        System.out.println(LINE_SEPARATOR);
     }
 
     public void printLottoNumbers(List<Integer> numbers) {
@@ -60,6 +61,6 @@ public class OutputView {
     }
 
     public void printPurchaseCount(int count) {
-        System.out.printf((PURCHASE_COUNT) + LINE_SEPARATOR, count);
+        System.out.printf(LINE_SEPARATOR + (PURCHASE_COUNT) + LINE_SEPARATOR, count);
     }
 }

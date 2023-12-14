@@ -3,6 +3,7 @@ package lotto.view;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String REQUEST_MONEY = "구입금액을 입력해 주세요.";
     private static final String REQUEST_WINNING_NUMBER = "당첨 번호를 입력해 주세요.";
     private static final String REQUEST_BONUS_NUMBER = "보너스 번호를 입력해 주세요.";
@@ -16,7 +17,7 @@ public class InputView {
     }
 
     public String readWinningNumber() {
-        System.out.println(REQUEST_WINNING_NUMBER);
+        System.out.println(LINE_SEPARATOR + REQUEST_WINNING_NUMBER);
         String input = getUserInput();
         validateEmptyLine(input);
 
@@ -24,7 +25,7 @@ public class InputView {
     }
 
     public String readBonusNumber() {
-        System.out.println(REQUEST_BONUS_NUMBER);
+        System.out.println(LINE_SEPARATOR + REQUEST_BONUS_NUMBER);
         String input = getUserInput();
         validateEmptyLine(input);
 

@@ -21,14 +21,11 @@ public class Lotto {
         validateOverRange(numbers);
     }
 
+    // 로또 한장에 대한 matchCount
     public int matchCount(Lotto otherLotto) {
-        int count = 0;
-        for (Integer number : numbers) {
-            if (otherLotto.isContain(number)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) numbers.stream()
+                .filter(otherLotto::isContain)
+                .count();
     }
 
     public boolean isContain(int number) {

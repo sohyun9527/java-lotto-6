@@ -4,7 +4,8 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class WinningNumbers {
-    private static final int SECOND_OR_THIRD_PRIZE = 5;
+    private static final int START_NUMBER = 1;
+    private static final int END_NUMBER = 45;
     private final Lotto winningLotto;
     private final int bonusNumber;
 
@@ -14,7 +15,7 @@ public class WinningNumbers {
     }
 
     public EnumMap<Prize, Integer> checkPrizeResult(List<Lotto> purchaseLotto) {
-        EnumMap<Prize, Integer> result = new EnumMap<>(Prize.class);
+        EnumMap<Prize, Integer> result = initialize();
 
         for (Lotto lotto : purchaseLotto) {
             int matchCount = winningLotto.matchCount(lotto);
@@ -24,13 +25,29 @@ public class WinningNumbers {
         return result;
     }
 
+    private EnumMap<Prize, Integer> initialize() {
+        EnumMap<Prize, Integer> map = new EnumMap<>(Prize.class);
+        for (Prize value : Prize.values()) {
+            map.put(value, 0);
+        }
+
+        return map;
+    }
+
     private int validateBonusNumber(String bonusInput) {
         // 숫자만? 당첨번호랑 중복 안됨?
         validateOnlyDigit(bonusInput);
         int bonusNumber = Integer.parseInt(bonusInput);
+        validateNumberRange(bonusNumber);
         validateDuplicateWithWinningNumber(bonusNumber);
 
         return bonusNumber;
+    }
+
+    private void validateNumberRange(int bonusNumber) {
+        if (bonusNumber < START_NUMBER || bonusNumber > END_NUMBER) {
+            throw new IllegalArgumentException("[ERROR] 1 ~ 45 사이의 수를 입력해주세요.");
+        }
     }
 
     private void validateDuplicateWithWinningNumber(int bonusNumber) {
